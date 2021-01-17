@@ -1,3 +1,4 @@
 main
 *.json
 *.csv
+.vscode

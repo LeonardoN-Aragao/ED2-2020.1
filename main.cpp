@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include "Sort.h"
 
 void menuAux(char a) {
     
@@ -30,7 +32,21 @@ void menuAux(char a) {
     }
     case '2':
     {
+        cout<<endl;
+        vector<int> numero;
+        numero.resize(6);
 
+        numero[0] = 4;
+        numero[1] = 1;
+        numero[2] = 7;
+        numero[3] = 3;
+        numero[4] = 8;
+        numero[5] = 2;
+
+        mergeSort(numero,0,numero.size());
+        cout<<endl;
+        for(int i = 0; i < numero.size(); i++)
+            cout<<numero[i]<<" ";
         break;
     }
     case '3':
@@ -81,5 +97,14 @@ void menu()
 }
 
 int main(){
+    char a [4] = {'m','i','t','o'};
+    char b [5] = {'m','i','n','a','s'}; 
+
+    if(! true){ // Usar func compare sei la
+        int c = strcmp(a,b);
+        if( c < 0)
+            //é menor
+        cout<< "TESTE:"<<c;
+    }
     menu();
 }
