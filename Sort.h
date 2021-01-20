@@ -6,7 +6,6 @@ using namespace std;
 
 void quickSort(){}
 
-
 // ------------- MERGESORT -------------
 
 /*
@@ -15,31 +14,34 @@ void quickSort(){}
     Passo 3: intercalar as duas metades. 
 */
 
-void merge(int vetor[], int inicio, int meio, int fim, int aux[]) {
+void merge(int vet[], int inicio, int meio, int fim, int aux[]) {
 
+    // Separa as partições
     int a = inicio;
     int b = meio;
 
     for (int i = inicio; i < fim; ++i) {
-        
+        // Se ainda existe algum numero na partição A não usado
         if (a < meio) {
-            if((b >= fim) || (vetor[a] < vetor[b])){
-                aux[i] = vetor[a];
+            // Se o valor de A for < que o valor de B ou se os valores de B já foram completamente usado
+            if((vet[a] < vet[b]) || (b >= fim)){
+                aux[i] = vet[a];
                 ++a;
             }
             else {
-                aux[i] = vetor[b];
+                aux[i] = vet[b];
                 ++b;
             }
         }
         else {
-            aux[i] = vetor[b];
+            aux[i] = vet[b];
             ++b;
         }
     }
 
+    // Copia as alterações de aux para vet
     for (int i = inicio; i < fim; ++i)
-        vetor[i] = aux[i];
+        vet[i] = aux[i];
 }
 
 void mergeSort(int vet[], int inicio, int fim, int aux[]) {
@@ -52,31 +54,5 @@ void mergeSort(int vet[], int inicio, int fim, int aux[]) {
     }
 }
 
-struct Regiao
-{
-    string cidade;
-    string estado;
-};
-
-struct Relatorio
-{
-    int numero_casos;
-    int numero_mortes;
-    int numero_notificados;
-    int numero_suspeitos;
-    int numero_infectados;
-    string data;
-    Regiao local;
-};
-
-/*
- { AM MG MT}
- AM { ... }, MG { ... }, MT { ... }
-
- Relatorio estado_relatorio[num_estados][cidade][num_relatorio]
-
-*/
-
 // https://www.geeksforgeeks.org/cocktail-sort/
 void cocktailSort(){}
-
