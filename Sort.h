@@ -63,6 +63,71 @@ void mergeSort(vector<int> vet, int inicio, int final){
     }
 }
 
+void intercala(int vet[], int inicio, int meio, int fim) //funcao de intercalacao do Mergesort
+{
+    /*recebe o vetor vet[] a ser ordenado
+    o inicio de uma das particoes: inicio_l1
+    o meio onde as particoes foram divididas: meio
+    o fim da particao seguinte: fim_l2*/
+
+    int i,j,k;
+    int tam_A = meio-inicio+1; //tamanho da primeira particao
+    int tam_B = fim-meio; //tamanho da segunta particao
+
+    int A[tam_A], B[tam_B]; //vetores auxiliares das particoes
+
+    for (i=0;i<tam_A;i++) //copia dos elementos de vet para a primeira particao
+    {
+        A[i]=vet[inicio+i];
+    }
+    for (j=0;j<tam_B;j++) // copia dos elementos de vet para a segunda particao
+    {
+        B[j]=vet[meio+1+j];
+    }
+
+    i=0;
+    j=0;
+    k=inicio;
+
+    while (i<tam_A && j<tam_B) // ordenacao
+    {
+        if(A[i]<B[j])
+        {
+            vet[k]=A[i];
+            i++;
+        }
+        else
+        {
+            vet[k]=B[j];
+            j++;
+        }
+        k++;
+    }
+    while (i<tam_A) //copia dos elementos restantes da primeira particao
+    {
+        vet[k]=A[i];
+        i++;
+        k++;
+    }
+    while (j<tam_B) // copia dos elemtnos restantes da segunda particao
+    {
+        vet[k]=B[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(int vetor[],int inicio, int fim)
+{
+    if (inicio<fim)
+    {
+        int meio=(inicio+fim)/2;// inicio + (fim-1)/2 evita overflow de numeros grandes
+        mergeSort(vetor,inicio,meio);
+        mergeSort(vetor,meio+1,fim);
+        intercala(vetor,inicio,meio,fim);
+    }
+}
+
 
 struct Regiao
 {
@@ -91,3 +156,4 @@ struct Relatorio
 
 // https://www.geeksforgeeks.org/cocktail-sort/
 void cocktailSort(){}
+

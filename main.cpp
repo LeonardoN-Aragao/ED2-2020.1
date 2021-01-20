@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include "Sort.h"
+#include "Registros.h"
 
 void menuAux(char a) {
     
@@ -53,7 +54,6 @@ void menuAux(char a) {
     {        
         
         std::cout << "\nAguarde... \n";
-
         std::cout << "\nFinalizado! \n";
         break;
     }
@@ -96,12 +96,17 @@ void menu()
     }
 }
 
-int main(){
+int main(int arg_t, char ** argv){
     char a [4] = {'m','i','t','o'};
     char b [5] = {'m','i','n','a','s'}; 
 
+    cout<<"O caminho "<<argv[1]<<" foi recebido"<<endl;
+    
+    Registros * r = new Registros[260];
+    r->leitura(r,argv[1]);
+
     if(! true){ // Usar func compare sei la
-        int c = strcmp(a,b);
+        int c = strcmp(a,b); //retorna se a é menor ou mair que b, e precisa de um compare antes, pois em caso igual pega o numero da tabela ASCII
         if( c < 0)
             //é menor
         cout<< "TESTE:"<<c;
