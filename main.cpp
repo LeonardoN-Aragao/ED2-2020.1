@@ -6,67 +6,114 @@
 
 void menuAux(char a) {
     
+    cout<<endl;
+
     switch (a) {
 
-    case '1':
-    {   
-        std::string  file_name = "";
-        std::cout << "Digite o nome do arquivo: ";
-        std::cin >> file_name; 
+        case '1':
+        {   
+            std::string  file_name = "";
+            std::cout << "Digite o nome do arquivo: ";
+            std::cin >> file_name; 
 
-        std::string data;
-        std::fstream file;
-        file.open(file_name);
+            std::string data;
+            std::fstream file;
+            file.open(file_name);
 
-        if(file.is_open()){
-            getline(file,data);
-            int tam =  stoi(data);
-
-            for(int i = 0; i<tam; i++){
+            if(file.is_open()){
                 getline(file,data);
+                int tam =  stoi(data);
+
+                for(int i = 0; i<tam; i++){
+                    getline(file,data);
+                }
             }
+            else
+                std::cout << "\nArquivo " << file_name << " não encontrado!\n";
+
+            break;
         }
-        else
-            std::cout << "\nArquivo " << file_name << " não encontrado!\n";
+        case '2':
+        {   
+            clock_t ti, tf; 
 
-        break;
-    }
-    case '2':
-    {
-        cout<<endl;
-        int tam = 6;
-        int numero[tam] = {0};
+            //Zera variaveis dos sort
+            trocaQS = 0;
+            trocaMS = 0;
+            trocaCS = 0;
+            compQS = 0;
+            compMS = 0;
+            compCS = 0;
 
-        numero[0] = 4;
-        numero[1] = 1;
-        numero[2] = 7;
-        numero[3] = 3;
-        numero[4] = 8;
-        numero[5] = 2;
+            cout<<"MergeSort"<<endl;
 
-        int vetAux[tam];
-        mergeSort(numero,0,tam,vetAux);
-        cout<<endl;
-        for(int i = 0; i < tam; i++)
-            cout<<numero[i]<<" ";
-        break;
-    }
-    case '3':
-    {        
-        
-        std::cout << "\nAguarde... \n";
+            int tam = 6;
+            int numero[tam] = {0};
 
-        std::cout << "\nFinalizado! \n";
-        break;
-    }
-    //---------- Usar para Testes ----------
-    case '4':
-    {
-        std::cout << "\nSem testes por aqui no momento. :(\n";
-        break;
-    }
-    default:
-        break;
+            numero[0] = 4;
+            numero[1] = 1;
+            numero[2] = 7;
+            numero[3] = 3;
+            numero[4] = 8;
+            numero[5] = 2;
+
+            int vetAux[tam];
+
+            ti=clock();
+
+            mergeSort(numero,0,tam,vetAux);
+
+            tf=clock();
+            cout<<endl<<"Tempo gasto: "<<(tf-ti)/1000<<endl;
+
+            for(int i = 0; i < tam; i++)
+                cout<<numero[i]<<" ";
+            cout<<endl;
+
+            cout<<endl;
+            cout<<"Quick Sort"<<endl;
+
+            numero[0] = 4;
+            numero[1] = 1;
+            numero[2] = 7;
+            numero[3] = 3;
+            numero[4] = 8;
+            numero[5] = 2;
+
+            ti=clock();
+
+            quickSort(numero,0,tam);
+
+            tf=clock();
+            cout<<endl<<"Tempo gasto: "<<(tf-ti)/1000<<endl;
+
+            cout<<endl;
+            for(int i = 0; i < tam; i++)
+                cout<<numero[i]<<" ";
+            cout<<endl;
+            
+            cout<<endl;
+            cout<<"trocaMS: "<<trocaMS<<" compMS: "<<compMS<<endl;
+            cout<<"trocaQS: "<<trocaQS<<" compMS: "<<compQS<<endl;
+
+            break;
+        }
+        case '3':
+        {        
+            
+            std::cout << "\nAguarde... \n";
+
+            std::cout << "\nFinalizado! \n";
+            break;
+        }
+        //---------- Usar para Testes ----------
+        case '4':
+        {
+            std::cout << "\nSem testes por aqui no momento. :(\n";
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -99,6 +146,7 @@ void menu()
 }
 
 int main(int arg_t, char ** argv){
+
     char a [4] = {'m','i','r','o'};
     char b [5] = {'m','i','n','a','s'}; 
 
