@@ -2,69 +2,118 @@
 #include <fstream>
 #include <vector>
 #include "Sort.h"
-#include "Registros.h"
+//#include "Registros.h"
 
 void menuAux(char a) {
     
+    cout<<endl;
+
     switch (a) {
 
-    case '1':
-    {   
-        std::string  file_name = "";
-        std::cout << "Digite o nome do arquivo: ";
-        std::cin >> file_name; 
+        case '1':
+        {   
+            std::string  file_name = "";
+            std::cout << "Digite o nome do arquivo: ";
+            std::cin >> file_name; 
 
-        std::string data;
-        std::fstream file;
-        file.open(file_name);
+            std::string data;
+            std::fstream file;
+            file.open(file_name);
 
-        if(file.is_open()){
-            getline(file,data);
-            int tam =  stoi(data);
-
-            for(int i = 0; i<tam; i++){
+            if(file.is_open()){
                 getline(file,data);
+                int tam =  stoi(data);
+
+                for(int i = 0; i<tam; i++){
+                    getline(file,data);
+                }
             }
+            else
+                std::cout << "\nArquivo " << file_name << " não encontrado!\n";
+
+            break;
         }
-        else
-            std::cout << "\nArquivo " << file_name << " não encontrado!\n";
+        case '2':
+        {   
+            clock_t ti, tf; 
 
-        break;
-    }
-    case '2':
-    {
-        cout<<endl;
-        vector<int> numero;
-        numero.resize(6);
+            //Zera variaveis dos sort
+            trocaQS = 0;
+            trocaMS = 0;
+            trocaCS = 0;
+            compQS = 0;
+            compMS = 0;
+            compCS = 0;
 
-        numero[0] = 4;
-        numero[1] = 1;
-        numero[2] = 7;
-        numero[3] = 3;
-        numero[4] = 8;
-        numero[5] = 2;
+            cout<<"MergeSort"<<endl;
 
-        mergeSort(numero,0,numero.size());
-        cout<<endl;
-        for(int i = 0; i < numero.size(); i++)
-            cout<<numero[i]<<" ";
-        break;
-    }
-    case '3':
-    {        
-        
-        std::cout << "\nAguarde... \n";
-        std::cout << "\nFinalizado! \n";
-        break;
-    }
-    //---------- Usar para Testes ----------
-    case '4':
-    {
-        std::cout << "\nSem testes por aqui no momento. :(\n";
-        break;
-    }
-    default:
-        break;
+            int tam = 6;
+            int numero[tam] = {0};
+
+            numero[0] = 4;
+            numero[1] = 1;
+            numero[2] = 7;
+            numero[3] = 3;
+            numero[4] = 8;
+            numero[5] = 2;
+
+            int vetAux[tam];
+
+            ti=clock();
+
+            mergeSort(numero,0,tam,vetAux);
+
+            tf=clock();
+            cout<<endl<<"Tempo gasto: "<<(tf-ti)/1000<<endl;
+
+            for(int i = 0; i < tam; i++)
+                cout<<numero[i]<<" ";
+            cout<<endl;
+
+            cout<<endl;
+            cout<<"Quick Sort"<<endl;
+
+            numero[0] = 4;
+            numero[1] = 1;
+            numero[2] = 7;
+            numero[3] = 3;
+            numero[4] = 8;
+            numero[5] = 2;
+
+            ti=clock();
+
+            quickSort(numero,0,tam);
+
+            tf=clock();
+            cout<<endl<<"Tempo gasto: "<<(tf-ti)/1000<<endl;
+
+            cout<<endl;
+            for(int i = 0; i < tam; i++)
+                cout<<numero[i]<<" ";
+            cout<<endl;
+            
+            cout<<endl;
+            cout<<"trocaMS: "<<trocaMS<<" compMS: "<<compMS<<endl;
+            cout<<"trocaQS: "<<trocaQS<<" compMS: "<<compQS<<endl;
+
+            break;
+        }
+        case '3':
+        {        
+            
+            std::cout << "\nAguarde... \n";
+
+            std::cout << "\nFinalizado! \n";
+            break;
+        }
+        //---------- Usar para Testes ----------
+        case '4':
+        {
+            std::cout << "\nSem testes por aqui no momento. :(\n";
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -97,13 +146,13 @@ void menu()
 }
 
 int main(int arg_t, char ** argv){
-    char a [4] = {'m','i','t','o'};
+
+    char a [4] = {'m','i','r','o'};
     char b [5] = {'m','i','n','a','s'}; 
 
-    cout<<"O caminho "<<argv[1]<<" foi recebido"<<endl;
-    
-    Registros * r = new Registros[260];
-    r->leitura(r,argv[1]);
+    //cout<<"O caminho "<<argv[1]<<" foi recebido"<<endl;
+    //Registros * r = new Registros[260];
+    //r->leitura(r,argv[1]);
 
     if(! true){ // Usar func compare sei la
         int c = strcmp(a,b); //retorna se a é menor ou mair que b, e precisa de um compare antes, pois em caso igual pega o numero da tabela ASCII

@@ -4,8 +4,54 @@
 
 using namespace std;
 
-void quickSort(){}
+// Variaveis de troca e comparação dos algoritmos
+int trocaQS;
+int compQS;
+int trocaMS;
+int compMS;
+int trocaCS;
+int compCS;
 
+// Chave de ordenação o número de casos confirmados
+
+void troca(int * a, int * b)
+{
+    int t = *a;
+    *a=*b;
+    *b=t;
+    trocaQS++;
+}
+
+int particao(int vet[], int inicio, int fim)//particionamento de Livro por conta do id
+{   
+    int meio = (inicio+fim)/2;
+    // Seta o pivo e move para o final da particao
+    int pivo = vet[meio];
+    troca(&vet[meio],&vet[fim]);
+
+    // Move os elementos menor que o pivo para a posição do contador i
+    int i = inicio-1;
+    for (int j = inicio;j<=fim;j++)
+    {
+        if (vet[j]<pivo)
+        {
+            i++;
+            troca(&vet[i],&vet[j]);
+        }
+        compQS++;
+    }
+    troca(&vet[i+1],&vet[fim]);
+
+    return i+1;
+}
+
+void quickSort(int vet[],int inicio,int fim){
+    if (inicio<fim-1){
+        int part = particao(vet,inicio,fim-1);
+        quickSort(vet,inicio,part);
+        quickSort(vet,part+1,fim-1);
+    }
+}
 
 // ------------- MERGESORT -------------
 
@@ -14,146 +60,50 @@ void quickSort(){}
     Passo 2: Ordenar as duas metade
     Passo 3: intercalar as duas metades. 
 */
-vector<int> merge(vector<int> vet, int inicio, int meio, int fim){
-    
-    for(int z = inicio; z < fim; z++)
-        cout<<vet[z]<<" ";
-    cout<<endl;
 
-    int i = inicio;
-    int j = meio;
-    int k = 0;
+void merge(int vet[], int inicio, int meio, int fim, int aux[]) {
 
-    while(i <= meio && j <= fim){
-        if(vet[i] < vet[j]){
-            vet[k] = vet[j];
-            i++;
+    // Não precisa de 2 vetores auxiliares apenas um resolve
+    // Separa as partições
+    int a = inicio;
+    int b = meio;
+
+    for (int i = inicio; i < fim; ++i) {
+        // Se ainda existe algum numero na partição A não usado
+        if (a < meio) {
+            // Se o valor de A for < que o valor de B ou se os valores de B já foram completamente usado
+            if((vet[a] < vet[b]) || (b >= fim)){
+                aux[i] = vet[a];
+                trocaMS++;
+                a++;
+            }
+            else {
+                aux[i] = vet[b];
+                b++;
+            }
+            compMS++;
         }
-        else{
-            vet[k] = vet[i];
-            j++;
+        else {
+            aux[i] = vet[b];
+            ++b;
         }
-        k++;
+        compMS++;
     }
-    while(i <= meio){
-        vet[k] = vet[i];
-        i++;
-        k++;
-    }
-    while(j <= fim){
-        vet[k] = vet[j];
-        j++;
-        k++;
-    }
-    return vet;
+
+    // Copia as alterações de aux para vet
+    for (int i = inicio; i < fim; ++i)
+        vet[i] = aux[i];
 }
 
-void mergeSort(vector<int> vet, int inicio, int final){
-    cout<<endl;
-    cout<<"inicio: "<<inicio<<endl;
-    cout<<"final: "<<final<<endl;
+void mergeSort(int vet[], int inicio, int fim, int aux[]) {
 
-    if(inicio < (final-1)){
-        int meio = (inicio + final)/2;
-        cout<<"meio: "<<meio<<endl;
-        mergeSort(vet,inicio,meio);
-        cout<<endl;
-        mergeSort(vet,meio,final);
-        vet = merge(vet,inicio,meio,final);
+    if(inicio < fim-1){
+        int meio = (inicio + fim)/2;
+        mergeSort(vet, inicio, meio, aux);
+        mergeSort(vet, meio, fim, aux);
+        merge(vet, inicio, meio, fim, aux);
     }
 }
-
-void intercala(int vet[], int inicio, int meio, int fim) //funcao de intercalacao do Mergesort
-{
-    /*recebe o vetor vet[] a ser ordenado
-    o inicio de uma das particoes: inicio_l1
-    o meio onde as particoes foram divididas: meio
-    o fim da particao seguinte: fim_l2*/
-
-    int i,j,k;
-    int tam_A = meio-inicio+1; //tamanho da primeira particao
-    int tam_B = fim-meio; //tamanho da segunta particao
-
-    int A[tam_A], B[tam_B]; //vetores auxiliares das particoes
-
-    for (i=0;i<tam_A;i++) //copia dos elementos de vet para a primeira particao
-    {
-        A[i]=vet[inicio+i];
-    }
-    for (j=0;j<tam_B;j++) // copia dos elementos de vet para a segunda particao
-    {
-        B[j]=vet[meio+1+j];
-    }
-
-    i=0;
-    j=0;
-    k=inicio;
-
-    while (i<tam_A && j<tam_B) // ordenacao
-    {
-        if(A[i]<B[j])
-        {
-            vet[k]=A[i];
-            i++;
-        }
-        else
-        {
-            vet[k]=B[j];
-            j++;
-        }
-        k++;
-    }
-    while (i<tam_A) //copia dos elementos restantes da primeira particao
-    {
-        vet[k]=A[i];
-        i++;
-        k++;
-    }
-    while (j<tam_B) // copia dos elemtnos restantes da segunda particao
-    {
-        vet[k]=B[j];
-        j++;
-        k++;
-    }
-}
-
-void mergeSort(int vetor[],int inicio, int fim)
-{
-    if (inicio<fim)
-    {
-        int meio=(inicio+fim)/2;// inicio + (fim-1)/2 evita overflow de numeros grandes
-        mergeSort(vetor,inicio,meio);
-        mergeSort(vetor,meio+1,fim);
-        intercala(vetor,inicio,meio,fim);
-    }
-}
-
-
-struct Regiao
-{
-    string cidade;
-    string estado;
-};
-
-struct Relatorio
-{
-    int numero_casos;
-    int numero_mortes;
-    int numero_notificados;
-    int numero_suspeitos;
-    int numero_infectados;
-    string data;
-    Regiao local;
-};
-
-/*
- { AM MG MT}
- AM { ... }, MG { ... }, MT { ... }
-
- Relatorio estado_relatorio[num_estados][cidade][num_relatorio]
-
-*/
 
 // https://www.geeksforgeeks.org/cocktail-sort/
 void cocktailSort(){}
-

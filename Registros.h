@@ -16,17 +16,11 @@ class Registros
         Registros();
         virtual ~Registros();
 
-        void setData(string data);
-
         void leitura (Registros* r, char* caminho);
-
-        string getData();
-
         void imprimirRegistros(Registros* r);
-
+        void setData(string data);
+        string getData();
         Estados* estados;
-
-    protected:
 
     private:
         string data;
