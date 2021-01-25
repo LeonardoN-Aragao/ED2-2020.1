@@ -19,87 +19,30 @@ void troca(int * a, int * b)
     int t = *a;
     *a=*b;
     *b=t;
+    trocaQS++;
 }
 
 int particao(int vet[], int inicio, int fim)//particionamento de Livro por conta do id
-{
+{   
     int meio = (inicio+fim)/2;
-    int m = 0;
+    // Seta o pivo e move para o final da particao
+    int pivo = vet[meio];
+    troca(&vet[meio],&vet[fim]);
 
-    cout<<"fim: "<<fim<<endl;
-    cout<<"\nAntes de escolher o pivo"<<endl;
-    for(int i = 0; i <= fim ; i++)
-        cout<<vet[i]<<" ";
-    cout<<endl;
-
-    if (vet[inicio]<vet[meio])// comparacao dos ids para decidir a mediana
-    {
-        if ((vet[meio])<(vet[fim]))
-        {
-            m = meio;
-            compQS++;
-        }
-        else
-        {
-            if ((vet[inicio])<(vet[fim]))
-            {
-                m = fim;
-                compQS++;
-            }
-            else
-            {
-                m = inicio;
-                compQS++;
-            }
-        }
-    }
-    else
-    {
-        if ((vet[fim])<(vet[meio]))
-        {
-            m = meio;
-            compQS++;
-        }
-        else
-        {
-            if ((vet[fim])<(vet[inicio]))
-            {
-                m = fim;
-                compQS++;
-            }
-            else
-            {
-                m = inicio;
-                compQS++;
-            }
-        }
-    }
-    troca(&vet[m],&vet[fim]); //troca do livro na posicao mediana para o da posicao final
-    trocaQS++;
-
-    int pivo = vet[fim]; // selecao do pivo
-
-    cout<<"\npivo: "<<pivo<<endl;
-    for(int i = 0; i <= fim ; i++)
-        cout<<vet[i]<<" ";
-    cout<<endl;
-
-
+    // Move os elementos menor que o pivo para a posição do contador i
     int i = inicio-1;
     for (int j = inicio;j<=fim;j++)
     {
-        if (vet[j]<pivo) //comparacao do id de cada livro com o pivo
+        if (vet[j]<pivo)
         {
             i++;
             troca(&vet[i],&vet[j]);
-            trocaQS++;
-            compQS++;
         }
+        compQS++;
     }
     troca(&vet[i+1],&vet[fim]);
-    trocaQS++;
-    compQS++;
-    return i+1; //retorno da particao
+
+    return i+1;
 }
 
 void quickSort(int vet[],int inicio,int fim){
