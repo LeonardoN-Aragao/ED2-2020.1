@@ -12,10 +12,6 @@ Registros::~Registros()
     //dtor
 }
 
-void Registros::setData(string data) {this->data=data;}
-
-string Registros::getData() {return this->data;}
-
 void Registros::leitura(Registros* r, char* caminho)
 {
     ifstream arquivo;
