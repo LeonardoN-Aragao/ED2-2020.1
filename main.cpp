@@ -96,6 +96,23 @@ void menuAux(char a) {
             cout<<"trocaMS: "<<trocaMS<<" compMS: "<<compMS<<endl;
             cout<<"trocaQS: "<<trocaQS<<" compMS: "<<compQS<<endl;
 
+            int vet[] = { 5, 1, 4, 2, 8, 0, 2 };
+            int n =  7;
+
+            printf("Vetor nao ordenado : \n");
+            ImprirmirVetores(vet, n);
+
+            ti = clock();
+
+            CocktailSort(vet, n);
+
+            tf = clock();
+            printf("Vetor ordenado :\n");
+            ImprirmirVetores(vet, n);
+            
+            cout<<endl<<"Tempo gasto: "<<(tf-ti)/1000<<endl;
+            cout<<endl;
+            cout<<"trocaCS: "<<trocaCS<<" compCS: "<<compCS<<endl;
             break;
         }
         case '3':
@@ -149,7 +166,6 @@ int main(int arg_t, char ** argv){
 
     char a [4] = {'m','i','r','o'};
     char b [5] = {'m','i','n','a','s'}; 
-
     //cout<<"O caminho "<<argv[1]<<" foi recebido"<<endl;
     //Registros * r = new Registros[260];
     //r->leitura(r,argv[1]);

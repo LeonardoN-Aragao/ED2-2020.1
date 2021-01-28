@@ -91,7 +91,7 @@ void Registros::leitura(Registros* r, char* caminho)
                     cout<<"Data: "<<r[i].getData()<<", "<<"Estado: "<<r[i].estados[j].getCodEstado()<<", "<<"Cidade: "<<r[i].estados[j].cidades[k].getNome()<<", "<<"Codigo: "<<r[i].estados[j].cidades[k].getCodigo()<<", "<<"Casos: "<<r[i].estados[j].cidades[k].getCasos()<<", "<<"Mortes: "<<r[i].estados[j].cidades[k].getMortes()<<endl;
                 }
                 else
-                {//Mudan�a no codigo do estado, deve passar para o proximo estado
+                {//Mudança no código do estado, deve passar para o próximo estado
 
                     if(i==0) {r[i].estados[j].setNumCidades(k+1);} //Atualizando o numero de cidades do estado anterior. Nao e preciso mudar essa grandeza quando i !=0, pois isso ja tera sido feito na primeira iteracao de i.
 

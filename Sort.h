@@ -105,5 +105,54 @@ void mergeSort(int vet[], int inicio, int fim, int aux[]) {
     }
 }
 
-// https://www.geeksforgeeks.org/cocktail-sort/
-void cocktailSort(){}
+void CocktailSort(int vet[],int tam)
+{
+    bool troca = true;
+    int inicio = 0;
+    int fim = tam -1;
+    while(troca)
+    {
+        //Vetor desordenado e o algoritmo irá buscar o maior e ir comparando o maior com o proximo até o maior chegar na última posição
+        troca = false;
+        for(int i = inicio; i < fim; ++i)
+        {
+            compCS++;
+            if(vet[i]>vet[i + 1])
+            {
+                //Troca caso o valor no indice i seja maior que no valor no indice i +1
+                swap(vet[i],vet[i + 1]);
+                troca = true;
+                trocaCS++;
+            }
+        }
+        if(!troca)
+        {
+            break;
+        }
+
+        //O maior já esta no ultimo lugar do array então andaremos de trás para frente exceto o último
+        fim = fim -1;
+        for(int i = fim - 1; i >= inicio; --i)
+        {
+            compCS++;
+            if(vet[i] > vet[i + 1])
+            {
+                //Troca caso o valor no indice i seja maior que no valor no indice i +1
+                swap(vet[i],vet[i + 1]);
+                troca = true;
+                trocaCS++;
+            }
+        }
+         //aumenta o inicio porque o menor valor já está na primeira posição
+        inicio = inicio + 1;
+    }
+}
+
+void ImprirmirVetores(int vet[], int tam)
+{
+    for (int i = 0; i < tam; i++)
+    {
+        printf("%d ", vet[i]);
+    }
+    printf("\n");
+}
