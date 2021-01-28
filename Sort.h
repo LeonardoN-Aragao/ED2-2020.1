@@ -105,5 +105,4 @@ void mergeSort(int vet[], int inicio, int fim, int aux[]) {
     }
 }
 
-// https://www.geeksforgeeks.org/cocktail-sort/
 void cocktailSort(){}
