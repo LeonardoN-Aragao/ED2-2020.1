@@ -203,11 +203,8 @@ void menu() {
 
 int main(int arg_t, char ** argv){
 
-    //10000,50000,100000,1000000
-    if(arg_t == 3){
+    if(arg_t == 2)
         caminho = argv[1];
-        n = atoi(argv[2]);
-    }
     else
         exit(1);
 
