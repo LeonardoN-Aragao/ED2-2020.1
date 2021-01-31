@@ -106,7 +106,7 @@ void mergeSort(int vet[], int inicio, int fim, int aux[]) {
     }
 }
 
-void CocktailSort(int vet[],int tam)
+void CocktailSort(Cidades vet[],int tam)
 {
     bool troca = true;
     int inicio = 0;
@@ -118,7 +118,7 @@ void CocktailSort(int vet[],int tam)
         for(int i = inicio; i < fim; ++i)
         {
             compCS++;
-            if(vet[i]>vet[i + 1])
+            if(vet[i].getCasos() >vet[i + 1].getCasos())
             {
                 //Troca caso o valor no indice i seja maior que no valor no indice i +1
                 swap(vet[i],vet[i + 1]);
@@ -136,7 +136,7 @@ void CocktailSort(int vet[],int tam)
         for(int i = fim - 1; i >= inicio; --i)
         {
             compCS++;
-            if(vet[i] > vet[i + 1])
+            if(vet[i].getCasos() >vet[i + 1].getCasos())
             {
                 //Troca caso o valor no indice i seja maior que no valor no indice i +1
                 swap(vet[i],vet[i + 1]);
@@ -147,13 +147,4 @@ void CocktailSort(int vet[],int tam)
          //aumenta o inicio porque o menor valor já está na primeira posição
         inicio = inicio + 1;
     }
-}
-
-void ImprirmirVetores(int vet[], int tam)
-{
-    for (int i = 0; i < tam; i++)
-    {
-        printf("%d ", vet[i]);
-    }
-    printf("\n");
 }

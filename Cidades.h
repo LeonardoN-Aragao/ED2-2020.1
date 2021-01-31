@@ -30,6 +30,8 @@ class Cidades
         string codigo;
         int casos;
         int mortes;
+        int registroID;
+        int estadoID;
 };
 
 #endif // CIDADES_H

@@ -16,10 +16,9 @@ class Estados
         virtual ~Estados();
 
         void setCodEstado(string codEstado);
-
-        string getCodEstado();
-
         void setNumCidades(int n);
+
+        string getCodEstado();       
         int getNumCidades();
 
         Cidades* cidades;//5570 cidades
@@ -29,6 +28,7 @@ class Estados
     private:
         string codigoEstado;
         int numCidades;
+        int registroID;
 };
 
 #endif // ESTADOS_H
