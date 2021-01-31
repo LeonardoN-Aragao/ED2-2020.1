@@ -18,18 +18,13 @@ class Registros
         Registros();
         virtual ~Registros();
 
-        void setData(string data);
-        void leitura (Registros* r, char* caminho);
-        void setTamanho(int t);
+        void setData(string date) {data = date;}
+        void setTamanho(int t) {tamanho = t;}
+        string getData() {return data;}
+        int getTamanho() {return tamanho;}
 
         void imprimir(Registros* r);
-
-        string getData();
-        int getTamanho();
-
         Estados* estados;
-
-    protected:
 
     private:
         string data;

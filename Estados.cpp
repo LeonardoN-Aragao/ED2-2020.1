@@ -2,14 +2,14 @@
 
 Estados::Estados()
 {
-    this->codigoEstado = " ";
-    this->cidades = new Cidades[855];
-    this->numCidades=0;
+    codigoEstado = " ";
+    cidades = new Cidades[855];
+    numCidades=0;
 }
 
 Estados::~Estados()
 {
-    //dtor
+    delete [] cidades;
 }
 
 void Estados::setCodEstado(string codEstado)

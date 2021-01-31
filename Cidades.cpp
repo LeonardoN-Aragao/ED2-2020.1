@@ -2,15 +2,10 @@
 
 Cidades::Cidades()
 {
-    this->nome = " ";
-    this->codigo = " ";
-    this->casos=0;
-    this->mortes=0;
-}
-
-Cidades::~Cidades()
-{
-    //dtor
+    nome = " ";
+    codigo = " ";
+    casos = 0;
+    mortes = 0;
 }
 
 void Cidades::setNome(string nome)

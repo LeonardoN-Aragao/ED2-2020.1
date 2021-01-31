@@ -11,7 +11,7 @@ class Cidades
 {
     public:
         Cidades();
-        ~Cidades();
+        ~Cidades() {};
 
         void setNome(string nome);
         void setCodigo(string codigo);
