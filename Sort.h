@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include "Cidades.h"
 
 using namespace std;
 
@@ -14,26 +15,26 @@ int compCS;
 
 // Chave de ordenação o número de casos confirmados
 
-void troca(int * a, int * b)
+void troca(Cidades * a,Cidades * b)
 {
-    int t = *a;
+    Cidades t = *a;
     *a=*b;
     *b=t;
     trocaQS++;
 }
 
-int particao(int vet[], int inicio, int fim)//particionamento de Livro por conta do id
+int particao(Cidades vet[], int inicio, int fim)//particionamento de Livro por conta do id
 {   
     int meio = (inicio+fim)/2;
     // Seta o pivo e move para o final da particao
-    int pivo = vet[meio];
+    Cidades pivo = vet[meio];
     troca(&vet[meio],&vet[fim]);
 
     // Move os elementos menor que o pivo para a posição do contador i
     int i = inicio-1;
     for (int j = inicio;j<=fim;j++)
     {
-        if (vet[j]<pivo)
+        if (vet[j].getCasos()<pivo.getCasos())
         {
             i++;
             troca(&vet[i],&vet[j]);
@@ -45,7 +46,7 @@ int particao(int vet[], int inicio, int fim)//particionamento de Livro por conta
     return i+1;
 }
 
-void quickSort(int vet[],int inicio,int fim){
+void quickSort(Cidades vet[],int inicio,int fim){
     if (inicio<fim-1){
         int part = particao(vet,inicio,fim-1);
         quickSort(vet,inicio,part);

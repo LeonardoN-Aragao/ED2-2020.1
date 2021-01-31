@@ -15,8 +15,6 @@ class Registros
     public:
         Registros();
         virtual ~Registros();
-
-        void leitura (Registros* r, char* caminho);
         void imprimirRegistros(Registros* r);
         void setData(string data);
         string getData();
