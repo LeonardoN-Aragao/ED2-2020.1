@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include "Registros.h"
 #include "Cidades.h"
 
 using namespace std;
@@ -8,10 +9,102 @@ using namespace std;
 // Variaveis de troca e comparação dos algoritmos
 int trocaQS;
 int compQS;
-int trocaMS;
-int compMS;
+int trocaIS;
+int compIS;
 int trocaCS;
 int compCS;
+int trocaMS;
+int compMS;
+
+//Variaveis de controle da ordenação Pre-Processamento
+int trocaR=0;
+int trocaE=0;
+int trocaC=0;
+
+int comparacao(string a, string b)//Funcao auxiliar para facilitar a organização do codigo
+{
+    return strncmp(a.c_str(),b.c_str(),min(a.length(),b.length()));  
+}
+
+void insertionSort(Cidades * c, int tam){
+    Cidades pivo;
+    int j;
+    for(int i=0;i<tam;i++)
+    {
+        pivo=c[i];
+        j=i-1;
+        while(j >= 0 && c[j].getCasos()>pivo.getCasos()){
+
+            c[j+1]=c[j];
+            j--;
+            trocaIS++;
+            compIS++;
+        }
+        c[j+1]=pivo;
+        trocaIS++;
+    }
+}
+
+void insertionSortCidades(Cidades* c,int tam)
+//Insertion sort, cidades
+{
+    Cidades pivo;
+    int j;
+    for(int i=0;i<tam;i++)
+    {
+        pivo=c[i];
+        j=i-1;
+        while(j>=0&&(comparacao(c[j].getNome(),pivo.getNome()))>0)
+        {
+            c[j+1]=c[j];
+            j--;
+            trocaC++;
+        }
+        c[j+1]=pivo;
+        trocaC++;
+    }
+}
+
+void insertionSortEstados(Estados* e,int tam)
+//Insertion sort, estados
+{
+    Estados pivo;
+    int j;
+    for(int i=0;i<tam;i++)
+    {
+        pivo=e[i];
+        j=i-1;
+        while(j>=0&&(comparacao(e[j].getCodEstado(),pivo.getCodEstado()))>0)
+        {
+            e[j+1]=e[j];
+            j--;
+            trocaE++;
+        }
+        e[j+1]=pivo;
+        trocaE++;
+    }
+}
+
+void insertionSortRegistros(Registros* r,int tam)
+//Insertion sort, registros
+{
+    Registros pivo;
+    int j;
+    for(int i=0;i<tam;i++)
+    {
+        pivo=r[i];
+        j=i-1;
+        while(j>=0&&(comparacao(r[j].getData(),pivo.getData()))>0)
+        {
+            r[j+1]=r[j];
+            j--;
+            trocaR++;
+        }
+        r[j+1]=pivo;
+        trocaR++;
+    }
+}
+
 
 // Chave de ordenação o número de casos confirmados
 
@@ -106,7 +199,7 @@ void mergeSort(int vet[], int inicio, int fim, int aux[]) {
     }
 }
 
-void CocktailSort(Cidades vet[],int tam)
+void cocktailSort(Cidades vet[],int tam)
 {
     bool troca = true;
     int inicio = 0;
