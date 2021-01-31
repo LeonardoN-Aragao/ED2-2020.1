@@ -3,7 +3,7 @@
 #include <vector>
 #include "Registros.h"
 #include "Cidades.h"
-
+ 
 using namespace std;
 
 // Variaveis de troca e comparação dos algoritmos
